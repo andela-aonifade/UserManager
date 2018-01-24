@@ -1,0 +1,23 @@
+version: '3'
+services:
+  usermanager-alc:
+    env_file:
+      - ./.env
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+    volumes:
+    - .:/usr/src/app
+    - /usr/src/app/node_modules
+    networks:
+      - usermanager-network
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - usermanager-network
+networks:
+  usermanager-network:
+    driver: bridge
